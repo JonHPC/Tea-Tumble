@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1095892447810468}
+  m_IsPrefabAsset: 1
+--- !u!1 &1095892447810468
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4703306555095794}
+  - component: {fileID: 114641531044517648}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4703306555095794
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1095892447810468}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114641531044517648
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1095892447810468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66606c16c039c403798ba4d67eb0567f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnRate: 3
+  PlatformSpawn: {fileID: 0}
+  collectible1: {fileID: 1256996968770192, guid: b80a03e6fa2ae4793bc07563971a9641,
+    type: 2}
+  obstacle1: {fileID: 1188892991021632, guid: c9539ecc4538b436b83de230e1af161a, type: 2}
+  upgradeBlock: {fileID: 1212479126657582, guid: b65a0e25f49cd464bb5488639ae1d1ec,
+    type: 2}
+  slowBlock: {fileID: 1900688533353776, guid: e3dfda2353b234b3e9fab936a50f1445, type: 2}
+  jackpotBlock: {fileID: 1102370569243222, guid: 01d77a52969d74870adef78eb0216947,
+    type: 2}
+  platforms:
+  - {fileID: 1175237879134248, guid: ea663061ad07546f686525b67325cbfe, type: 2}
+  - {fileID: 1558728795431900, guid: f21cde241d3684202a8b85c6bd26f26d, type: 2}
+  - {fileID: 1768690736421188, guid: 614fc2fe90b3d4fb08ad8c5653292f1a, type: 2}
+  - {fileID: 1354060319564340, guid: a637888e7eded457f82f82631ca249a1, type: 2}
+  - {fileID: 1407910890252592, guid: e9fea793d86e644cda635895a047f071, type: 2}
+  - {fileID: 1614440126393786, guid: 59f918243da704b30baa5151a9d3e92e, type: 2}
+  - {fileID: 1013913638082594, guid: 09351a0467c9e44a093c3582948a5b8b, type: 2}
+  - {fileID: 1086912796420154, guid: 0bc0b24295d2446eea9962a8400a235f, type: 2}
+  - {fileID: 1376786484670944, guid: a298610bf50cb4b6fa5bcbfdf4f94302, type: 2}
+  - {fileID: 1120538554772966, guid: 36591ebec5e95467eac2ebb42a17a6c1, type: 2}
+  - {fileID: 1377477099265534, guid: 00be79099d0b5412f830ba776609c931, type: 2}
+  - {fileID: 1480004376005794, guid: 94ff2429bbdf742a08156140b8bdc7e7, type: 2}
+  - {fileID: 1330876257787000, guid: a45fc675117564478a5c693c4ed791eb, type: 2}
+  - {fileID: 1861103282631114, guid: 4dc21f1061b644a2b89bddb8b36a08d5, type: 2}
+  - {fileID: 1572411972394068, guid: 7d349057d6ea54892b0bf85cb2b9c101, type: 2}
+  - {fileID: 1942968093445130, guid: 2615aac2b11d742fdb95a5a71479a1f9, type: 2}
+  - {fileID: 1742094064172660, guid: ceb6f92c05ad34a4281176ddd4817465, type: 2}
+  - {fileID: 1528107959068292, guid: 8ffa6d0840b27431bb56589291d9521b, type: 2}
+  collectibleSpawn:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  upgradeSpawn:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  collectiblePerPlatform: 3
+  tmpLevelText: {fileID: 0}
+  tmpLevelPopup: {fileID: 0}
+  platformSpeed: 3
+  superStatus: 0
+  superDuration: 5
+  player: {fileID: 0}
+  deathWall: {fileID: 0}
+  range: 10
