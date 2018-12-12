@@ -75,6 +75,11 @@ public class DeathScript : MonoBehaviour {
         {
             Destroy(other.gameObject);//destroys obstacles on collision
         }
+
+        else if (other.gameObject.CompareTag("LandingColor"))
+        {
+            Destroy(other.gameObject);//destroys the landing color sprites
+        }
     }
 
     IEnumerator delayedShowAd(float delay)

@@ -6,9 +6,12 @@ using TMPro;
 
 public class IsGrounded : MonoBehaviour {
 
-    public TextMeshProUGUI groundedStatus;
+    public TextMeshProUGUI groundedStatus;//shows the current status, either "air" or "grounded"
 
-   void OnTriggerEnter (Collider other)//checks to make sure the player is grounded before allowing a jump
+    
+
+
+    void OnTriggerEnter (Collider other)//checks to make sure the player is grounded before allowing a jump
     {
         if (other.gameObject.layer != LayerMask.NameToLayer("Platform"))// makes sure the isGrounded collider is touching a collider tagged platform
         {
@@ -18,6 +21,10 @@ public class IsGrounded : MonoBehaviour {
         transform.parent.gameObject.GetComponent<PlayerMovement>().isGrounded = true;//If so, sets the isGrounded boolean in the playermovement script to true.
 
         groundedStatus.text = "Ground";
+
+        //Instantiate(landingColor, landingColorSpawn.position, landingColorSpawn.rotation);
+
+
     }
 
 
@@ -31,4 +38,6 @@ public class IsGrounded : MonoBehaviour {
         transform.parent.gameObject.GetComponent<PlayerMovement>().isGrounded = false; //accesses the Accelerometer script in the parent and changes the variable to false
         groundedStatus.text = "Air";
     }
+
+
 }

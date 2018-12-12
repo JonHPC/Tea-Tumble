@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class MainMenu : MonoBehaviour {
 
     public Animator bunnyRun;//references the bunny run animation
     public Rigidbody bunnyPhysics;// references the 2d rigidbody component of bunnyrun
-
-
+    public AudioSource menuSound;
+   
 
     public void PlayGame()
     {
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+        AudioSource startAudio = GetComponent<AudioSource>();
+        startAudio.Play();
         bunnyRun.SetTrigger("Start");//makes the bunny switch to the roll animation
         bunnyPhysics.isKinematic = false;//turns on physics on the rigidbody2d
         bunnyPhysics.AddForce(0f, 1000f,0f);//simulates a jump by adding force
@@ -37,6 +40,10 @@ public class MainMenu : MonoBehaviour {
         Application.Quit();
     }
 
-
+    public void MenuSound()
+    {
+        menuSound.Play();//plays a menu sound whenever a button is pressed, except for the Start button
+    }
+    
 
 }

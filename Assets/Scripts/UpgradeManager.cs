@@ -10,12 +10,17 @@ public class UpgradeManager : MonoBehaviour {
     //public TextMeshProUGUI tmpUpgradeText;//gets the UI text for upgrades
     public GameObject upgradeSound; //gets the prefab with the audio for the upgrade
 
-    public float upgradeMoverSpeed;
+    public float upgradeMoverSpeed;//will sync with the platform speed variable in the gameManager script
 
     public GameObject upgradeParticleSystem;
 
+    public float desiredScale = 0.4f;//this will be used to scale down the strawberry
    
-   
+
+    void Start()
+    {
+        desiredScale = 0.4f;//scales down the strawberry sprite upon spawning
+    }
 
 
 
@@ -31,7 +36,7 @@ public class UpgradeManager : MonoBehaviour {
             GameObject upgradeParticles = Instantiate(upgradeParticleSystem, transform.position, transform.rotation) as GameObject;
             ParticleSystem parts = upgradeParticles.GetComponent<ParticleSystem>();
             float totalDuration = parts.duration + parts.startLifetime;
-            Destroy(upgradeParticles, totalDuration);
+            Destroy(upgradeParticles, totalDuration);//destroys the particle system after the duration of the particle system animation
 
             GameObject clone = Instantiate(upgradeSound, transform.position, transform.rotation);//spawns the audio prefab gameobject
             AudioSource cloneAudio = clone.GetComponent<AudioSource>();//gets the audio source from that game object
@@ -48,5 +53,6 @@ public class UpgradeManager : MonoBehaviour {
     private void FixedUpdate()
     {
         transform.Translate(Vector3.up * upgradeMoverSpeed * Time.deltaTime, Space.World);//moves the upgrades upwards every frame
+        transform.localScale = new Vector3(desiredScale, desiredScale, desiredScale);//scales the strawberry sprite each frame
    }
 }

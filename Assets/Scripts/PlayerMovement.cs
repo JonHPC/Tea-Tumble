@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
     public Material defaultMaterial; //default player color
     public Material redMaterial;//juggernaut color
     public Material whiteMaterial; //default platform and wall color
-    public Material greenMaterial; //slow color
+    public Material purpleMaterial; //slow color
 
     public GameObject topWall; //top wall
     public GameObject bottomWall;
@@ -53,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject collectible;//references Collectible prefab for the jackpot upgrade
     public GameObject collectibleJackpotParticleSystem;//references the particle system for when the collectible is hit when jackpot is active
     public GameObject superParticleSystem;//the particle animation that plays when the super is activated
+    public GameObject superCollectibleParticleSystem;//references the particle system that plays when super is active
     public GameObject slowPanel;//a green panel that is applied to the whole screen when slow is activated
 
     public Material jackpotMaterial; //material for collectibles when Jackpot is active
@@ -86,6 +87,7 @@ public class PlayerMovement : MonoBehaviour
         superCharge = 0f;//initializes the charge
         superStatus = false;//initializes the super status to off
         chargeAmount = 1f;//initializes charge amount
+        isGrounded = false;
       
         tmpScoreText.text = "Score: " + score.ToString(); //initializes the score text
         tmpUpgradeText.text = "Upgrade: None"; //initializes the upgrade text
@@ -153,12 +155,19 @@ public class PlayerMovement : MonoBehaviour
                 superCharge = Mathf.Clamp(superCharge, 0f, 100f);//restricts the value of superCharge between 0 and 100
                 SetSuperCharge();//runs the Set SuperCharge function
             }
+            if(superStatus==true)
+            {
+                GameObject superCollectiblePS = Instantiate(superCollectibleParticleSystem, transform.position, transform.rotation);//if super is active, spawn this particle system when colliding with the collectibles
+                ParticleSystem superParts = superCollectiblePS.GetComponent<ParticleSystem>();//creates a particle system from this component
+                float superTotalDuration = superParts.duration + superParts.startLifetime;
+                Destroy(superCollectiblePS, superTotalDuration);//
+            }
            if(upgradeJackpot==true)
             {
                 GameObject collectibleJPPS = Instantiate(collectibleJackpotParticleSystem, transform.position, transform.rotation) as GameObject;//if jackpot is active, spawn this particle system when colliding with a collectible
-                ParticleSystem parts = collectibleJPPS.GetComponent<ParticleSystem>();
-                float totalDuration = parts.duration + parts.startLifetime;
-                Destroy(collectibleJPPS, totalDuration);
+                ParticleSystem parts = collectibleJPPS.GetComponent<ParticleSystem>();//creates a particle system called "parts" that gets this component
+                float totalDuration = parts.duration + parts.startLifetime;//calculates the total duration 
+                Destroy(collectibleJPPS, totalDuration);//destroys this particle system when the duration is done
             
             }
 
@@ -241,7 +250,7 @@ public class PlayerMovement : MonoBehaviour
         GameObject superParticles = Instantiate(superParticleSystem, new Vector3 (0f,0f,0f), transform.rotation) as GameObject;//spawns particle system when super is activated as a game object
         ParticleSystem parts = superParticles.GetComponent<ParticleSystem>();//gets the particle system component and places it onto "parts"
         float totalDuration = parts.duration + parts.startLifetime;//sets the total duration of the particle lifespan onto the variable
-        Destroy(superParticles, 1.5f);//destroy the super particles after the total duration is up
+        Destroy(superParticles, 3.0f);//destroy the super particles after the total duration is up
     }
 
     public void JuggernautOn()

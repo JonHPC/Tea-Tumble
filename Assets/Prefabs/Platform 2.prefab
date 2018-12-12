@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4515389498671946}
   - component: {fileID: 114500033750815890}
   - component: {fileID: 65995091371854878}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Platform 2
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 23409338710295742}
   - component: {fileID: 65554617642974976}
   - component: {fileID: 54084131213701560}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: L2 Platform
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 23680975600555078}
   - component: {fileID: 65424136946718112}
   - component: {fileID: 54341050243403536}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: R15 Platform
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ Transform:
   m_GameObject: {fileID: 1949769811129640}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.5, y: 0, z: 0}
-  m_LocalScale: {x: 15, y: 1, z: 2}
+  m_LocalScale: {x: 15, y: 0.15, z: 2}
   m_Children: []
   m_Father: {fileID: 4515389498671946}
   m_RootOrder: 1
@@ -102,7 +102,7 @@ Transform:
   m_GameObject: {fileID: 1866155843999526}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -9, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 1, z: 2}
+  m_LocalScale: {x: 2, y: 0.15, z: 2}
   m_Children: []
   m_Father: {fileID: 4515389498671946}
   m_RootOrder: 0

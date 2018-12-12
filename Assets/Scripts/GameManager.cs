@@ -7,27 +7,29 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
-   
+
     //public float spawnDelay = 0f; //seconds until first platform is spawned
-    public float spawnRate = 4f; //Inital time between platforms spawned
+    public float spawnRate;//Inital time between platforms spawned
     public Transform PlatformSpawn; // references the SpawnPoint game object
     public GameObject collectible1; //the basic cube collectible
     public GameObject obstacle1; //a basic obstacle block
     public GameObject upgradeBlock; //the juggernaut upgrade block
     public GameObject slowBlock; //the slow upgrade block
     public GameObject jackpotBlock; //the jackpot upgrade block
+    public GameObject landingColor;//access the sprite
+    public Transform landingColorSpawn;//access the spawn point of the landing color sprite
     public GameObject[] platforms; //creates an array of platforms that can be spawned
     public Transform[] collectibleSpawn; //an array of collectible spawn points, also used to spawn obstacles
     public Transform[] upgradeSpawn;//an array of upgrade spawn points
     public int collectiblePerPlatform; //determines how many collectibles are spawned with each platform
     public TextMeshProUGUI tmpLevelText; //references the level text
     public TextMeshProUGUI tmpLevelPopup; //references the level popup
-    public float platformSpeed = 3f;//speed the platforms move at once spawned
+    public float platformSpeed;//speed the platforms move at once spawned
 
-    public bool superStatus = false;// checks to see if the super is active or not
-    public float superDuration = 5f; //initial super duration is 5 seconds
-    public GameObject player;
-    public GameObject deathWall;
+    public bool superStatus;// checks to see if the super is active or not
+    public float superDuration; //initial super duration is 5 seconds
+    public GameObject player; //references the player game object
+    public GameObject deathWall;//references the death wall game object
 
     private float elapsedTime = 4f; //how much time initially needed to pass before each platform spawns
     private int levelCount = 1;
@@ -45,6 +47,9 @@ public class GameManager : MonoBehaviour {
         FillList();// runs the FillList function to create a list of random numbers used to spawn collectibles
         tmpLevelText.text = "Level: " + levelCount.ToString();
         superDuration = 5f;//initializes
+        platformSpeed = 3f;//initializes the platform speed
+        spawnRate = 3f;//initializes the spawn rate
+        superStatus = false;//initializes the super status
        
     }
 
@@ -111,7 +116,7 @@ public class GameManager : MonoBehaviour {
                     GameObject collectible = Instantiate(collectible1, collectibleSpawn[collectibleSpawnIndex].position, collectibleSpawn[collectibleSpawnIndex].rotation);//instantiates a collectible at the above random point
 
                     CollectibleManager updateCollectibleSpeed = collectible.GetComponentInChildren<CollectibleManager>();//updates the speed of the collectible upwards
-                    updateCollectibleSpeed.collectibleMoverSpeed = platformSpeed;
+                    updateCollectibleSpeed.collectibleMoverSpeed = platformSpeed;//updates the speed of the spawned collectible with the current platformSpeed
 
 
                 }
@@ -124,7 +129,7 @@ public class GameManager : MonoBehaviour {
                 {
                     GameObject collectible = Instantiate(collectible1, collectibleSpawn[i].position, collectibleSpawn[i].rotation); //spawns one collectible from each spawn point in the array
                     CollectibleManager updateCollectibleSpeed = collectible.GetComponentInChildren<CollectibleManager>();
-                    updateCollectibleSpeed.collectibleMoverSpeed = platformSpeed;
+                    updateCollectibleSpeed.collectibleMoverSpeed = platformSpeed;//updates the speed of the spawned collectible with the current platformSpeed
                 }
 
                
@@ -224,13 +229,19 @@ public class GameManager : MonoBehaviour {
         }
 
         tmpLevelText.text = "Level: " + levelCount.ToString(); //constantly updates the level text with the current levelCount.
-        tmpLevelPopup.text = "Level " + levelCount.ToString();// updates the level popup with the current level
+        tmpLevelPopup.text = "Level: " + levelCount.ToString();// updates the level popup with the current level
+
+       /*if(player.GetComponent<PlayerMovement>().isGrounded == true)
+        {
+            Instantiate(landingColor, landingColorSpawn.position, landingColorSpawn.rotation);//if the player is contacting a platform, spawn the landing color sprite
+            landingColor.GetComponent<LandingMover>().landingColorSpeed = platformSpeed;//updates the LandingMover script with the current platform speed
+        }*/
     }
 
     public void SuperOn()
     {
         superStatus = true;//sets the super on
-       //player.GetComponent<PlayerMovement>().superStatus = true;
+       player.GetComponent<PlayerMovement>().superStatus = true;
         deathWall.GetComponent<DeathScript>().superStatus = true;
         timer = 0f;//sets the super timer to 0 to initialize
         player.GetComponent<PlayerMovement>().SuperParticles();//runs the SuperParticles function
@@ -240,7 +251,7 @@ public class GameManager : MonoBehaviour {
     {
         superStatus = false; //sets the super off
         deathWall.GetComponent<DeathScript>().fullCharge = false;//sets the Death Script fullCharge to false so the death wall can subtract super bar again
-        //player.GetComponent<PlayerMovement>().superStatus = false;
+        player.GetComponent<PlayerMovement>().superStatus = false;
         deathWall.GetComponent<DeathScript>().superStatus = false;
         timer = 0f;
     }

@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 33596372978963776}
   - component: {fileID: 23735096758579014}
   - component: {fileID: 65271775278819982}
-  - component: {fileID: 114998182862854574}
   - component: {fileID: 114352829093635790}
   m_Layer: 0
   m_Name: Jackpot
@@ -145,18 +144,6 @@ MonoBehaviour:
   jackpotMoverSpeed: 2
   jackpotParticleSystem: {fileID: 1052413356716830, guid: 7079f156929e245fdba172def4dca08f,
     type: 2}
---- !u!114 &114998182862854574
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1102370569243222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3c7b669c189245858207b21804d34a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collectibleMoverSpeed: 0
 --- !u!198 &198352029623778218
 ParticleSystem:
   m_ObjectHideFlags: 1
