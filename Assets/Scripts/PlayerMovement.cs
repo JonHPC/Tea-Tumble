@@ -10,15 +10,16 @@ using TMPro;
 public class PlayerMovement : MonoBehaviour
 {
 
-    public float tiltSpeed = 400f; //the speed the player moves
-    public float jumpPower = 700f; //jump power
-    public float collectibleScore = 5f;//initial points a collectible is worth
+    public float tiltSpeed = 200f; //the speed the player moves
+    public float jumpPower = 750f; //jump power
+    public float collectibleScore = 1f;//initial points a collectible is worth
 
     public bool isGrounded = false; //checks to make sure the player is grounded to prevent jumping mid air
     public bool upgradeJuggernaut = false;// checks to see if the Juggernaut upgrade is active
     public bool upgradeSlow = false; //checks to see if the Slow upgrade is active
-    public bool upgradeJackpot = false;
-    public bool superStatus = false;
+    public bool upgradeJackpot = false;//checks to see if Jackpot is active
+    public bool superStatus = false;//checks to see if super is on
+    public bool gamePaused = false;//checks to see if game is paused
 
     public int juggernautCharges = 5;//initial amount of obstacles/platforms the juggernaut can destroy
     public float slowDuration = 5f;//duration of the slow upgrade
@@ -63,6 +64,8 @@ public class PlayerMovement : MonoBehaviour
 
     public GameManager gameManager;//references the Game Manager game object
 
+
+
     private Rigidbody playerRb; //referenced the Rigidbody component 
     private float score; //creates a float to store score values
     private float highScore;//creates a float to store high score values
@@ -70,6 +73,12 @@ public class PlayerMovement : MonoBehaviour
     private float jackpotTimer = 0f;
     private SpriteRenderer flipIt;//references the sprite renderer to flip the sprite when going left or right
     private Animator animator;//references the animator component to play the animations
+
+    private Vector3 pos;//will store the player position
+    public GameObject light;//the groundglow game object
+    public GameObject light1;//ditto above
+    public GameObject light2;//ditto above
+    public GameObject light3;//ditto above
 
 
 
@@ -88,6 +97,8 @@ public class PlayerMovement : MonoBehaviour
         superStatus = false;//initializes the super status to off
         chargeAmount = 1f;//initializes charge amount
         isGrounded = false;
+        gamePaused = false;//initializes
+        collectibleScore = 1f;//initial score of collectibles
       
         tmpScoreText.text = "Score: " + score.ToString(); //initializes the score text
         tmpUpgradeText.text = "Upgrade: None"; //initializes the upgrade text
@@ -97,44 +108,49 @@ public class PlayerMovement : MonoBehaviour
 
         tmpGameOverNewHighScore.gameObject.SetActive(false);// sets the game over screen new high score text off at the beginning of the round
 
-        collectible.gameObject.GetComponent<Renderer>().material = tealMaterial;//set collctibles to default teal material
+        //collectible.gameObject.GetComponent<Renderer>().material = tealMaterial;//set collctibles to default teal material
+        collectible.gameObject.GetComponentInChildren<ParticleSystem>().startColor = new Color(0, 238, 250, 116);//sets the PS_Sparkle particle system to default blue
 
-        transform.Find("DefaultTrail").GetComponentInChildren<TrailRenderer>().enabled = true; //initializes blue default trail
-        transform.Find("JuggernautTrail").GetComponentInChildren<TrailRenderer>().enabled = false;
+
+        //transform.Find("DefaultTrail").GetComponentInChildren<TrailRenderer>().enabled = true; //initializes blue default trail
+        //transform.Find("JuggernautTrail").GetComponentInChildren<TrailRenderer>().enabled = false;
 
         flipIt = GetComponent<SpriteRenderer>();//gets the spriterender component 
         animator = GetComponent<Animator>();//gets the animator component
 
         transform.Find("JuggernautParticles").GetComponentInChildren<ParticleSystem>().enableEmission = false;//initializes the juggernaut particles to have emission off
+
+
+        StartCoroutine(offset());//starts the coroutine for the groundglow lag
     }
 
 
 
-   /* private void FixedUpdate() //update per frame for physics
-    {
+    /* private void FixedUpdate() //update per frame for physics
+     {
 
-        playerRb.AddForce(Input.acceleration.x * 200f, 0f, 0f);
-        playerRb.AddForce(0f, -30f, 0f);
-        //playerRb.AddForce(Input.acceleration * tiltSpeed); //adds the Tilt* the tileSpeed variable to add force to the player rigidbody
+         playerRb.AddForce(Input.acceleration.x * 200f, 0f, 0f);
+         playerRb.AddForce(0f, -30f, 0f);
+         //playerRb.AddForce(Input.acceleration * tiltSpeed); //adds the Tilt* the tileSpeed variable to add force to the player rigidbody
 
-        /*if(Input.touchCount > 0 && isGrounded == true && Input.GetTouch(0).phase == TouchPhase.Began) //makes sure there is only one touch and the jump only occurrs if the object is grounded.
-        {
-            playerRb.AddForce(new Vector3(0f, jumpPower, 0f), ForceMode.Force); //adds the jumpPower of force to the player rigidbody to make it jump
-            jumpSound.Play(); //plays jumpSound
-            //Debug.Log("IOS");//makes sure it shows IOS
-        }*/
+         /*if(Input.touchCount > 0 && isGrounded == true && Input.GetTouch(0).phase == TouchPhase.Began) //makes sure there is only one touch and the jump only occurrs if the object is grounded.
+         {
+             playerRb.AddForce(new Vector3(0f, jumpPower, 0f), ForceMode.Force); //adds the jumpPower of force to the player rigidbody to make it jump
+             jumpSound.Play(); //plays jumpSound
+             //Debug.Log("IOS");//makes sure it shows IOS
+         }*/
 
-      /*  if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) //makes sure there is only one touch and the jump only occurrs if the object is grounded.
-        {
-            playerRb.AddForce(new Vector3(0f, jumpPower, 0f), ForceMode.Force); //adds the jumpPower of force to the player rigidbody to make it jump
-            jumpSound.Play(); //plays jumpSound
-            //Debug.Log("IOS");//makes sure it shows IOS
-        }
-    }*/
+    /*  if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) //makes sure there is only one touch and the jump only occurrs if the object is grounded.
+      {
+          playerRb.AddForce(new Vector3(0f, jumpPower, 0f), ForceMode.Force); //adds the jumpPower of force to the player rigidbody to make it jump
+          jumpSound.Play(); //plays jumpSound
+          //Debug.Log("IOS");//makes sure it shows IOS
+      }
+  }*/
 
 
 
-   
+
 
     void OnTriggerEnter (Collider other)
     {
@@ -157,10 +173,15 @@ public class PlayerMovement : MonoBehaviour
             }
             if(superStatus==true)
             {
+                superCharge += chargeAmount; //adds 1 to the super bar
+                superCharge = Mathf.Clamp(superCharge, 0f, 100f);//restricts the value of superCharge between 0 and 100
+                SetSuperCharge();//runs the Set SuperCharge fn
+
+
                 GameObject superCollectiblePS = Instantiate(superCollectibleParticleSystem, transform.position, transform.rotation);//if super is active, spawn this particle system when colliding with the collectibles
                 ParticleSystem superParts = superCollectiblePS.GetComponent<ParticleSystem>();//creates a particle system from this component
                 float superTotalDuration = superParts.duration + superParts.startLifetime;
-                Destroy(superCollectiblePS, superTotalDuration);//
+                Destroy(superCollectiblePS, superTotalDuration);//destroyes this particle system after the duration is up
             }
            if(upgradeJackpot==true)
             {
@@ -184,7 +205,7 @@ public class PlayerMovement : MonoBehaviour
         {
 
             juggernautCharges -= 1; // subtracts a juggernaut charge each collision
-            //gameObject.GetComponentInChildren<ParticleSystem>().maxParticles = juggernautCharges;//sets the number of particles equal to the number of charges
+
             score += collectibleScore * 2f; //player gets collectibleScore points times 2 for destroying an obstacle
             SetScoreText();//updates the score
 
@@ -203,10 +224,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        /*if(other.gameObject.CompareTag("Platform") && upgradeJuggernaut == true)  //destroys all platforms on contact if juggernaut activated
-        {
-            Destroy(other.gameObject);
-        }*/
+       
 
     }
 
@@ -216,8 +234,8 @@ public class PlayerMovement : MonoBehaviour
     void SetScoreText()
     {
         //updates the score text with the new score
-        tmpScoreText.text = "Score: " + score.ToString();//updates the UI score text
-        tmpGameOverScore.text = "FINAL SCORE: " + score.ToString();//updates the Game Over final score text
+        tmpScoreText.text = "Stars collected: " + score.ToString();//updates the UI score text
+        tmpGameOverScore.text = "Stars collected: " + score.ToString();//updates the Game Over final score text
 
         if (score > highScore){ 
             PlayerPrefs.SetFloat("highScore", score); //updates the High Score player pref if the current score if higher
@@ -247,10 +265,17 @@ public class PlayerMovement : MonoBehaviour
 
    public void SuperParticles()
     {
-        GameObject superParticles = Instantiate(superParticleSystem, new Vector3 (0f,0f,0f), transform.rotation) as GameObject;//spawns particle system when super is activated as a game object
+        /*GameObject superParticles = Instantiate(superParticleSystem, new Vector3 (0f,0f,0f), transform.rotation) as GameObject;//spawns particle system when super is activated as a game object
         ParticleSystem parts = superParticles.GetComponent<ParticleSystem>();//gets the particle system component and places it onto "parts"
         float totalDuration = parts.duration + parts.startLifetime;//sets the total duration of the particle lifespan onto the variable
-        Destroy(superParticles, 3.0f);//destroy the super particles after the total duration is up
+        Destroy(superParticles, 3.0f);//destroy the super particles after the total duration is up*/
+
+        superParticleSystem.GetComponent<ParticleSystem>().enableEmission = true;//enables emission on the particles once super is active
+    }
+
+    public void SuperParticlesOff()
+    {
+        superParticleSystem.GetComponent<ParticleSystem>().enableEmission = false;//disables emission on the particles once super is active
     }
 
     public void JuggernautOn()
@@ -297,40 +322,40 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()// runs the below code every frame. Player jumpthis is also used as a buff timer
     {
-
-
-        playerRb.AddForce(Input.acceleration.x * 200f, 0f, 0f);//the input (-1 to 1) will be multiplied by 200f to control horizontal movement
-       playerRb.AddForce(0f, -50f, 0f);//this is the constant downward "gravity" force applied to the player
-       if(Input.acceleration.x < 0)//if device is tilted to the left, the sprite will be flipped on its x axis
+        if (gamePaused == false)//is game is paused, dont allow player inputs
         {
 
-            flipIt.flipX = true;
+
+            playerRb.AddForce(Input.acceleration.x * tiltSpeed, 0f, 0f);//the input (-1 to 1) will be multiplied by 200f to control horizontal movement
+            playerRb.AddForce(0f, -50f, 0f);//this is the constant downward "gravity" force applied to the player
+            if (Input.acceleration.x < 0)//if device is tilted to the left, the sprite will be flipped on its x axis
+            {
+
+                flipIt.flipX = true;
+            }
+            else if (Input.acceleration.x >= 0)//otherwise the sprite will face to the right
+            {
+                flipIt.flipX = false;
+            }
+            animator.SetBool("isGrounded", isGrounded);//sets isGrounded bool in the animation to false, to roll the bunny
+
+            //playerRb.AddForce(Input.acceleration * tiltSpeed); //adds the Tilt* the tileSpeed variable to add force to the player rigidbody
+
+            /*if(Input.touchCount > 0 && isGrounded == true && Input.GetTouch(0).phase == TouchPhase.Began) //makes sure there is only one touch and the jump only occurrs if the object is grounded.
+            {
+                playerRb.AddForce(new Vector3(0f, jumpPower, 0f), ForceMode.Force); //adds the jumpPower of force to the player rigidbody to make it jump
+                jumpSound.Play(); //plays jumpSound
+                //Debug.Log("IOS");//makes sure it shows IOS
+            }*/
+
+            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) //causes the player to jump, add "&& isGrounded == true" if you want to make it only jump when grounded
+            {
+                playerRb.AddForce(new Vector3(0f, jumpPower, 0f), ForceMode.Force); //adds the jumpPower of force to the player rigidbody to make it jump
+                jumpSound.Play(); //plays jumpSound
+
+            }
+
         }
-        else if(Input.acceleration.x >= 0)//otherwise the sprite will face to the right
-        {
-            flipIt.flipX = false;
-        }
-        animator.SetBool("isGrounded",isGrounded);//sets isGrounded bool in the animation to false, to roll the bunny
-
-       //playerRb.AddForce(Input.acceleration * tiltSpeed); //adds the Tilt* the tileSpeed variable to add force to the player rigidbody
-
-       /*if(Input.touchCount > 0 && isGrounded == true && Input.GetTouch(0).phase == TouchPhase.Began) //makes sure there is only one touch and the jump only occurrs if the object is grounded.
-       {
-           playerRb.AddForce(new Vector3(0f, jumpPower, 0f), ForceMode.Force); //adds the jumpPower of force to the player rigidbody to make it jump
-           jumpSound.Play(); //plays jumpSound
-           //Debug.Log("IOS");//makes sure it shows IOS
-       }*/
-
-          if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) //causes the player to jump, add "&& isGrounded == true" if you want to make it only jump when grounded
-          {
-              playerRb.AddForce(new Vector3(0f, jumpPower, 0f), ForceMode.Force); //adds the jumpPower of force to the player rigidbody to make it jump
-              jumpSound.Play(); //plays jumpSound
-              //animator.SetTrigger("Jump");
-              
-              //Debug.Log("IOS");//makes sure it shows IOS
-          }
-      
-
 
 
         if (upgradeSlow == false)
@@ -365,6 +390,28 @@ public class PlayerMovement : MonoBehaviour
                 JackpotOff();//runs this function 
             }
         }
+
+        pos = gameObject.transform.position;//sets pos vector3 with the player's position
+
+    }
+
+
+
+    IEnumerator offset()//a coroutine to update the position of the ground glow after X seconds
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(0.25f);//waits for this many seconds before updating the new location of the light
+            light.transform.position = pos-new Vector3(0,0,3);//offsets the Z transform by -3 of the light
+            yield return new WaitForSeconds(0.35f);
+            light1.transform.position = pos - new Vector3(0, 0, 3);
+            yield return new WaitForSeconds(0.45f);
+            light2.transform.position = pos - new Vector3(0, 0, 3);
+            yield return new WaitForSeconds(0.55f);
+            light3.transform.position = pos - new Vector3(0, 0, 3);
+        }
+       
+
     }
 
 
@@ -392,9 +439,22 @@ public class PlayerMovement : MonoBehaviour
 
         upgradeJackpot = true;
         jackpotTimer = 0f;
+
+        collectible.gameObject.GetComponentInChildren<ParticleSystem>().startColor = new Color(191,156,0,116);//sets  the next spawned collectibles to yellow
+
+        foreach (GameObject collectibleColor in GameObject.FindGameObjectsWithTag("Collectibles"))//finds all currently spawned collectible objects and turns them yellow
+        {
+            if(upgradeJackpot == true)//runs only if the jacpit upgrade is active
+            {
+                collectibleColor.gameObject.GetComponentInChildren<ParticleSystem>().startColor = new Color(191, 156, 0, 116);
+            }
+        }
+
+
+
         //collectibleScore = collectibleScore * 2f ; // doubles the score of the collectibles
 
-        collectible.gameObject.GetComponent<Renderer>().material = jackpotMaterial; //sets the next spawned collectible objects to jackpot material
+        /*collectible.gameObject.GetComponent<Renderer>().material = jackpotMaterial; //sets the next spawned collectible objects to jackpot material
 
         foreach (GameObject collectibleColor in GameObject.FindGameObjectsWithTag("Collectibles")) //finds all currently spawned collectible objects and turns them to jackpot material
         {
@@ -402,7 +462,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 collectibleColor.gameObject.GetComponent<Renderer>().material = jackpotMaterial;
             }
-        }
+        }*/
     }
 
     private void JackpotOff()
@@ -412,7 +472,18 @@ public class PlayerMovement : MonoBehaviour
         //collectibleScore = collectibleScore / 2f; //reverts the score to default
         chargeAmount = chargeAmount / 3f;//reverts the charge amount back to default
 
-        collectible.gameObject.GetComponent<Renderer>().material = tealMaterial; //changes the prefab collectibles' material back to default AKA future spawns are back to normal color
+
+        collectible.gameObject.GetComponentInChildren<ParticleSystem>().startColor = new Color(0, 238, 250, 116);//sets  the next spawned collectibles to teal
+
+        foreach (GameObject collectibleColor in GameObject.FindGameObjectsWithTag("Collectibles"))//finds all currently spawned collectible objects and turns them teal
+        {
+            if (upgradeJackpot == false)//runs only if the jacpit upgrade is off
+            {
+                collectibleColor.gameObject.GetComponentInChildren<ParticleSystem>().startColor = new Color(0,238,250,116);//turns all the above back to their default color
+            }
+        }
+
+        /*collectible.gameObject.GetComponent<Renderer>().material = tealMaterial; //changes the prefab collectibles' material back to default AKA future spawns are back to normal color
 
         foreach (GameObject collectibleColor in GameObject.FindGameObjectsWithTag("Collectibles"))//finds all the current collectibles in the scene
         {
@@ -420,6 +491,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 collectibleColor.gameObject.GetComponent<Renderer>().material = tealMaterial;//turns all the above game objects back to their default color
             }
-        }
+        }*/
     }
 }

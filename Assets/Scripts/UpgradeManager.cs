@@ -14,12 +14,12 @@ public class UpgradeManager : MonoBehaviour {
 
     public GameObject upgradeParticleSystem;
 
-    public float desiredScale = 0.4f;//this will be used to scale down the strawberry
+    //public float desiredScale = 0.4f;//this will be used to scale down the strawberry
    
 
     void Start()
     {
-        desiredScale = 0.4f;//scales down the strawberry sprite upon spawning
+       //desiredScale = 0.4f;//scales down the strawberry sprite upon spawning
     }
 
 
@@ -53,6 +53,11 @@ public class UpgradeManager : MonoBehaviour {
     private void FixedUpdate()
     {
         transform.Translate(Vector3.up * upgradeMoverSpeed * Time.deltaTime, Space.World);//moves the upgrades upwards every frame
-        transform.localScale = new Vector3(desiredScale, desiredScale, desiredScale);//scales the strawberry sprite each frame
+        //transform.localScale = new Vector3(desiredScale, desiredScale, desiredScale);//scales the strawberry sprite each frame
    }
+
+    void Update()
+    {
+        transform.Rotate(new Vector3(15, 30, 45) * Time.deltaTime); // rotates the collectible to make it look cool
+    }
 }

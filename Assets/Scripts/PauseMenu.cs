@@ -8,6 +8,7 @@ public class PauseMenu : MonoBehaviour {
     public static bool GameIsPaused = false;
 
     public GameObject pauseMenuUI;
+    public GameObject player;//accesses the player for the script to disable inputs
 	
 	// Update is called once per frame
 	void Update () {
@@ -28,6 +29,8 @@ public class PauseMenu : MonoBehaviour {
         pauseMenuUI.SetActive(false); // disables the pause menu
         Time.timeScale = 1f; // reverts time to normal
         GameIsPaused = false;
+        PlayerMovement playerPaused = player.GetComponent<PlayerMovement>();//accesses the playerMovement script 
+        playerPaused.gamePaused = false;//sets gamePaused to false
     }
 
     public void Pause()
@@ -35,6 +38,8 @@ public class PauseMenu : MonoBehaviour {
         pauseMenuUI.SetActive(true); // brings up the Pause menu
         Time.timeScale = 0f; //freezes time 
         GameIsPaused = true;
+        PlayerMovement playerPaused = player.GetComponent<PlayerMovement>();
+        playerPaused.gamePaused = true;//sets gamePaused to True so there are no player inputs during the pause screen
     }
 
     public void LoadMenu()//goes back to the title main menu

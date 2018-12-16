@@ -41,4 +41,9 @@ public class JackpotManager : MonoBehaviour {
     {
         transform.Translate(Vector3.up * jackpotMoverSpeed * Time.deltaTime, Space.World);//moves the upgrades upwards every frame
     }
+
+    void Update()
+    {
+        transform.Rotate(new Vector3(0,45, 0) * Time.deltaTime); // rotates the collectible to make it look cool
+    }
 }

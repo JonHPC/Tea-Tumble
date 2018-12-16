@@ -53,17 +53,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnRate: 3
   PlatformSpawn: {fileID: 0}
-  collectible1: {fileID: 1256996968770192, guid: b80a03e6fa2ae4793bc07563971a9641,
+  collectible1: {fileID: 1580732334707224, guid: 5bca8a0787b5e4ccca702cd683c7fbe4,
     type: 2}
   obstacle1: {fileID: 1188892991021632, guid: c9539ecc4538b436b83de230e1af161a, type: 2}
-  upgradeBlock: {fileID: 1212479126657582, guid: b65a0e25f49cd464bb5488639ae1d1ec,
+  upgradeBlock: {fileID: 1860801641203180, guid: 837e1e61c6eb44272acab8d21ef2632e,
     type: 2}
-  slowBlock: {fileID: 1900688533353776, guid: e3dfda2353b234b3e9fab936a50f1445, type: 2}
-  jackpotBlock: {fileID: 1102370569243222, guid: 01d77a52969d74870adef78eb0216947,
+  slowBlock: {fileID: 1736167171219160, guid: 8fc9d8419439e413f82b297982dd265c, type: 2}
+  jackpotBlock: {fileID: 1054993747504014, guid: d354d312499184e74b6025ec8bb0e56e,
     type: 2}
-  landingColor: {fileID: 1932587316738426, guid: 5f21352886da74be28c0b43e455ff9ed,
-    type: 2}
-  landingColorSpawn: {fileID: 0}
   platforms:
   - {fileID: 1175237879134248, guid: ea663061ad07546f686525b67325cbfe, type: 2}
   - {fileID: 1558728795431900, guid: f21cde241d3684202a8b85c6bd26f26d, type: 2}

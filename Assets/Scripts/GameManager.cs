@@ -16,8 +16,10 @@ public class GameManager : MonoBehaviour {
     public GameObject upgradeBlock; //the juggernaut upgrade block
     public GameObject slowBlock; //the slow upgrade block
     public GameObject jackpotBlock; //the jackpot upgrade block
-    public GameObject landingColor;//access the sprite
-    public Transform landingColorSpawn;//access the spawn point of the landing color sprite
+    //public GameObject landingColor;//access the sprite
+    //public Light lt;//replaces the above sprite with a point light
+    //public int ltCount;//tracks the number of lights spawned
+    //public Transform landingColorSpawn;//access the spawn point of the landing color sprite
     public GameObject[] platforms; //creates an array of platforms that can be spawned
     public Transform[] collectibleSpawn; //an array of collectible spawn points, also used to spawn obstacles
     public Transform[] upgradeSpawn;//an array of upgrade spawn points
@@ -210,9 +212,9 @@ public class GameManager : MonoBehaviour {
             else if (levelCount >= 3)//after the above, do this code
             {
                 spawnRate -= 0.25f; // increates the spawn rate
-                spawnRate = Mathf.Clamp(spawnRate, 0.6f, 3f); //restricts the spawn rate between 0.6 seconds and 3 seconds
+                spawnRate = Mathf.Clamp(spawnRate, 0.4f, 3f); //restricts the spawn rate between 0.6 seconds and 3 seconds
                 platformSpeed += 0.5f;
-                platformSpeed = Mathf.Clamp(platformSpeed, 1.5f, 7f); // restricts platform speeds
+                platformSpeed = Mathf.Clamp(platformSpeed, 1.5f, 8f); // restricts platform speeds
                 elapsedTime -= 3f;
             }
 
@@ -231,18 +233,23 @@ public class GameManager : MonoBehaviour {
         tmpLevelText.text = "Level: " + levelCount.ToString(); //constantly updates the level text with the current levelCount.
         tmpLevelPopup.text = "Level: " + levelCount.ToString();// updates the level popup with the current level
 
-       /*if(player.GetComponent<PlayerMovement>().isGrounded == true)
+       /*if(player.GetComponent<PlayerMovement>().isGrounded == true && elapsedTime > 0.1f)//creates spot lights if the player is grounded
         {
-            Instantiate(landingColor, landingColorSpawn.position, landingColorSpawn.rotation);//if the player is contacting a platform, spawn the landing color sprite
-            landingColor.GetComponent<LandingMover>().landingColorSpeed = platformSpeed;//updates the LandingMover script with the current platform speed
+            Instantiate(lt, landingColorSpawn.position, landingColorSpawn.rotation);//if the player is contacting a platform, spawn the landing color sprite
+            lt.GetComponent<GroundGlow>().ltSpeed = platformSpeed;//updates the LandingMover script with the current platform speed
+            //ltCount += 1;//adds 1 to the ltCount everytime a lt is spawned
+
+
         }*/
+
+       
     }
 
     public void SuperOn()
     {
         superStatus = true;//sets the super on
-       player.GetComponent<PlayerMovement>().superStatus = true;
-        deathWall.GetComponent<DeathScript>().superStatus = true;
+        player.GetComponent<PlayerMovement>().superStatus = true;
+        deathWall.GetComponent<DeathScript>().superStatus = true;//prevents the death wall from subtracting super charge
         timer = 0f;//sets the super timer to 0 to initialize
         player.GetComponent<PlayerMovement>().SuperParticles();//runs the SuperParticles function
     }
@@ -252,7 +259,8 @@ public class GameManager : MonoBehaviour {
         superStatus = false; //sets the super off
         deathWall.GetComponent<DeathScript>().fullCharge = false;//sets the Death Script fullCharge to false so the death wall can subtract super bar again
         player.GetComponent<PlayerMovement>().superStatus = false;
-        deathWall.GetComponent<DeathScript>().superStatus = false;
+        deathWall.GetComponent<DeathScript>().superStatus = false;//re-enables death wall ability to subtract super charge
         timer = 0f;
+        player.GetComponent<PlayerMovement>().SuperParticlesOff();//runs the SuperParticlesOff function
     }
 }

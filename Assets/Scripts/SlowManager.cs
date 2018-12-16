@@ -50,4 +50,6 @@ public class SlowManager : MonoBehaviour {
     {
         transform.Translate(Vector3.up * slowMoverSpeed * Time.deltaTime, Space.World);//moves the upgrades upwards every frame
     }
+
+
 }

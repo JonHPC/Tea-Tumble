@@ -127,5 +127,5 @@ MonoBehaviour:
   obstacleExplosion: {fileID: 1047988890242206, guid: 75e4c8f7550f548198e99912b0022f4a,
     type: 2}
   obstacleMoverSpeed: 2
-  obstacleExplosionParticles: {fileID: 1976850706910462, guid: 15cbbe28d6e7b4acdb0331577feb0db0,
+  obstacleExplosionParticles: {fileID: 1366197211217840, guid: 4e5931c776a644366af12cb76af14159,
     type: 2}
