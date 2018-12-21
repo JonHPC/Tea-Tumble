@@ -128,7 +128,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.8
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &198042079584037498
 ParticleSystem:
@@ -4816,8 +4816,8 @@ ParticleSystem:
       maxColor: {r: 0.6627451, g: 0.92941177, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.124530055, g: 0.024830889, b: 0.5849056, a: 1}
-        key1: {r: 0.2704004, g: 0.0740922, b: 0.4245283, a: 1}
+        key0: {r: 0.7353857, g: 0.6775098, b: 0.990566, a: 1}
+        key1: {r: 0.6285852, g: 0.16197933, b: 0.9811321, a: 1}
         key2: {r: 0.89411765, g: 0.9647059, b: 1, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}

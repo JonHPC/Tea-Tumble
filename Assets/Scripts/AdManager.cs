@@ -10,7 +10,7 @@ public class AdManager : MonoBehaviour {
 	void Update () 
     {
 
-            Advertisement.Show("video");
+            Advertisement.Show("video");//plays the video ad
         
 
 	}

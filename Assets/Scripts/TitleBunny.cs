@@ -10,18 +10,22 @@ public class TitleBunny : MonoBehaviour {
 
     private SpriteRenderer flipIt;//references the sprite renderer to flip the sprite when going left or right
 
-    private Vector3 pos;//will store the player position
-    public GameObject light;//the groundglow game object
-    public GameObject light1;//ditto above
-    public GameObject light2;//ditto above
-    public GameObject light3;//ditto above
+    public AudioSource jumpSound;//refernces the jump sound component
+
+    //private Vector3 pos;//will store the player position
+    //public GameObject light;//the groundglow game object
+    //public GameObject light1;//ditto above
+    //public GameObject light2;//ditto above
+    //public GameObject light3;//ditto above
 
     Vector3 originalPos;
                               
     void Start () {
         originalPos = gameObject.transform.position;//stores the initial position of the object
         flipIt = GetComponent<SpriteRenderer>();//initializes the sprite renderer component
-        StartCoroutine(offset());//starts the coroutine for the groundglow lag
+        //StartCoroutine(offset());//starts the coroutine for the groundglow lag
+
+        jumpSound = GetComponent<AudioSource>();//initializes this audio source
     }
 
     private void Update()
@@ -50,12 +54,12 @@ public class TitleBunny : MonoBehaviour {
             if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
             {
                 animator.SetTrigger("Start");
-
+                jumpSound.Play();//plays the audio for jump
                 bunnyRb.AddForce(new Vector3(0f, 750f, 0f), ForceMode.Force);//adds 750f upwards force
                 isGrounded = false;
             }
 
-            pos = gameObject.transform.position;//sets pos vector3 with the player's position
+            //pos = gameObject.transform.position;//sets pos vector3 with the player's position
         }
 
 
@@ -63,7 +67,7 @@ public class TitleBunny : MonoBehaviour {
        
     }
 
-    IEnumerator offset()//a coroutine to update the position of the ground glow after X seconds
+    /*IEnumerator offset()//a coroutine to update the position of the ground glow after X seconds
     {
         while (true)
         {
@@ -78,7 +82,7 @@ public class TitleBunny : MonoBehaviour {
         }
 
 
-    }
+    }*/
 
     public void ResetBunnyPos()
     {

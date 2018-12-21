@@ -30,6 +30,9 @@ public class GameManager : MonoBehaviour {
 
     public bool superStatus;// checks to see if the super is active or not
     public float superDuration; //initial super duration is 5 seconds
+
+    public GameObject superParticles;//used to turn the super PS sound on and off
+
     public GameObject player; //references the player game object
     public GameObject deathWall;//references the death wall game object
 
@@ -42,6 +45,7 @@ public class GameManager : MonoBehaviour {
 
     [SerializeField] private int range = 10; // size of array of spawn points
     List<int> list = new List<int>(); //creates a new, empty list of integers
+    private global::System.Object superParticlesSound;
 
     private void Start()
     {
@@ -52,6 +56,7 @@ public class GameManager : MonoBehaviour {
         platformSpeed = 3f;//initializes the platform speed
         spawnRate = 3f;//initializes the spawn rate
         superStatus = false;//initializes the super status
+        AudioSource superParticlesSound = superParticles.GetComponent<AudioSource>();//attaches the audio source to this variable
        
     }
 
@@ -156,7 +161,7 @@ public class GameManager : MonoBehaviour {
                 int randomObstacle = Random.Range(1, 3); //picks a random int 1-3
                 if (randomObstacle == 2 && superStatus==false)//there is a 1/3 chance to spawn an obstacle, also, will not spawn obstacles if super is active
                 {
-                    GameObject obstacle = Instantiate(obstacle1, collectibleSpawn[obstacleSpawnIndex].position, collectibleSpawn[obstacleSpawnIndex].rotation);
+                    GameObject obstacle = Instantiate(obstacle1, (collectibleSpawn[obstacleSpawnIndex].position-new Vector3(0f,0.75f,0f)), Quaternion.Euler(0f,253f,0f));//spawns an onstable with a negative 0.75Y to account for ObstacleCrystals weird origin
 
                     ObstacleManager updateObstacleSpeed = obstacle.GetComponent<ObstacleManager>();//gets the ObstacleManager script from the spawn obstacle
                     updateObstacleSpeed.obstacleMoverSpeed = platformSpeed;//updates the speed of the obstacle to match the platforms}
@@ -212,7 +217,7 @@ public class GameManager : MonoBehaviour {
             else if (levelCount >= 3)//after the above, do this code
             {
                 spawnRate -= 0.25f; // increates the spawn rate
-                spawnRate = Mathf.Clamp(spawnRate, 0.4f, 3f); //restricts the spawn rate between 0.6 seconds and 3 seconds
+                spawnRate = Mathf.Clamp(spawnRate, 0.5f, 3f); //restricts the spawn rate between 0.6 seconds and 3 seconds
                 platformSpeed += 0.5f;
                 platformSpeed = Mathf.Clamp(platformSpeed, 1.5f, 8f); // restricts platform speeds
                 elapsedTime -= 3f;
@@ -252,6 +257,10 @@ public class GameManager : MonoBehaviour {
         deathWall.GetComponent<DeathScript>().superStatus = true;//prevents the death wall from subtracting super charge
         timer = 0f;//sets the super timer to 0 to initialize
         player.GetComponent<PlayerMovement>().SuperParticles();//runs the SuperParticles function
+        AudioSource superParticlesSound = superParticles.GetComponent<AudioSource>();//attaches the audio source to this variable
+        superParticlesSound.volume = 1;//resets the volume back to one
+        superParticlesSound.Play();//plays the audio source on SuperPS2 when super is active
+
     }
 
     public void SuperOff()
@@ -262,5 +271,18 @@ public class GameManager : MonoBehaviour {
         deathWall.GetComponent<DeathScript>().superStatus = false;//re-enables death wall ability to subtract super charge
         timer = 0f;
         player.GetComponent<PlayerMovement>().SuperParticlesOff();//runs the SuperParticlesOff function
+        AudioSource superParticlesSound = superParticles.GetComponent<AudioSource>();//attaches the audio source to this variable
+        //superParticlesSound.Stop();//stops this audio when super is done
+        StartCoroutine(FadeSound());
+    }
+
+    IEnumerator FadeSound()
+    {
+        AudioSource superParticlesSound = superParticles.GetComponent<AudioSource>();//attaches the audio source to this variable
+        while (superParticlesSound.volume>0.01f)
+        {
+            superParticlesSound.volume -= Time.deltaTime / 4f;//fades the volume over 4 seconds
+            yield return null;
+        }
     }
 }

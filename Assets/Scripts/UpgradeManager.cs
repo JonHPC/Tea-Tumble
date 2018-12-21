@@ -58,6 +58,6 @@ public class UpgradeManager : MonoBehaviour {
 
     void Update()
     {
-        transform.Rotate(new Vector3(15, 30, 45) * Time.deltaTime); // rotates the collectible to make it look cool
+        transform.Rotate(new Vector3(0, 90, 0) * Time.deltaTime); // rotates the collectible to make it look cool
     }
 }

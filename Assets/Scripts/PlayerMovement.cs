@@ -32,10 +32,11 @@ public class PlayerMovement : MonoBehaviour
     public TextMeshProUGUI tmpHighScoreText;//UI
     public TextMeshProUGUI tmpGameOverScore;//game over screen score text
     public TextMeshProUGUI tmpGameOverNewHighScore; //game over screen, new high score text
+    public TextMeshProUGUI tmpTotalStars;//game over screen, total stars
     public Slider superBar;//references the super bar 
     public Button superButton;//references the super button
 
-    public AudioSource jumpSound;
+    public AudioSource jumpSound;//refernces the jump sound component
     public AudioSource pickUpSound;
 
     public GameObject audioManager;//music
@@ -54,7 +55,8 @@ public class PlayerMovement : MonoBehaviour
     public GameObject collectible;//references Collectible prefab for the jackpot upgrade
     public GameObject collectibleJackpotParticleSystem;//references the particle system for when the collectible is hit when jackpot is active
     public GameObject superParticleSystem;//the particle animation that plays when the super is activated
-    public GameObject superCollectibleParticleSystem;//references the particle system that plays when super is active
+    //public GameObject superCollectibleParticleSystem;//references the particle system that plays when super is active
+    public GameObject superLight;//references the light for platforms
     public GameObject slowPanel;//a green panel that is applied to the whole screen when slow is activated
 
     public Material jackpotMaterial; //material for collectibles when Jackpot is active
@@ -69,16 +71,17 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody playerRb; //referenced the Rigidbody component 
     private float score; //creates a float to store score values
     private float highScore;//creates a float to store high score values
+    private float totalStars;//creates a float to store total star values
     private float timer = 0f;
-    private float jackpotTimer = 0f;
+    private float jackpotTimer = 0f;//used to track jackpot duration
     private SpriteRenderer flipIt;//references the sprite renderer to flip the sprite when going left or right
     private Animator animator;//references the animator component to play the animations
 
-    private Vector3 pos;//will store the player position
-    public GameObject light;//the groundglow game object
-    public GameObject light1;//ditto above
-    public GameObject light2;//ditto above
-    public GameObject light3;//ditto above
+   // private Vector3 pos;//will store the player position
+   // public GameObject light;//the groundglow game object
+    //public GameObject light1;//ditto above
+    //public GameObject light2;//ditto above
+    //public GameObject light3;//ditto above
 
 
 
@@ -100,13 +103,16 @@ public class PlayerMovement : MonoBehaviour
         gamePaused = false;//initializes
         collectibleScore = 1f;//initial score of collectibles
       
-        tmpScoreText.text = "Score: " + score.ToString(); //initializes the score text
+        tmpScoreText.text = score.ToString(); //initializes the score text
         tmpUpgradeText.text = "Upgrade: None"; //initializes the upgrade text
 
         highScore = PlayerPrefs.GetFloat("highScore", 0f); //gets the stored high score. Default value is 0 if no high score exists.
         tmpHighScoreText.text = "High Score: " + highScore.ToString(); // sets the high score text to the above value, from the previous high score
 
         tmpGameOverNewHighScore.gameObject.SetActive(false);// sets the game over screen new high score text off at the beginning of the round
+
+        totalStars = PlayerPrefs.GetFloat("totalStars", 0f);//gest the stored totalStars value.
+        tmpTotalStars.text = "Total Stars: " + totalStars.ToString();//initializes the game over total stars text
 
         //collectible.gameObject.GetComponent<Renderer>().material = tealMaterial;//set collctibles to default teal material
         collectible.gameObject.GetComponentInChildren<ParticleSystem>().startColor = new Color(0, 238, 250, 116);//sets the PS_Sparkle particle system to default blue
@@ -118,10 +124,12 @@ public class PlayerMovement : MonoBehaviour
         flipIt = GetComponent<SpriteRenderer>();//gets the spriterender component 
         animator = GetComponent<Animator>();//gets the animator component
 
+        superLight.SetActive(false);//initially keeps this off
+
         transform.Find("JuggernautParticles").GetComponentInChildren<ParticleSystem>().enableEmission = false;//initializes the juggernaut particles to have emission off
 
 
-        StartCoroutine(offset());//starts the coroutine for the groundglow lag
+        //StartCoroutine(offset());//starts the coroutine for the groundglow lag
     }
 
 
@@ -178,10 +186,10 @@ public class PlayerMovement : MonoBehaviour
                 SetSuperCharge();//runs the Set SuperCharge fn
 
 
-                GameObject superCollectiblePS = Instantiate(superCollectibleParticleSystem, transform.position, transform.rotation);//if super is active, spawn this particle system when colliding with the collectibles
+                /*GameObject superCollectiblePS = Instantiate(superCollectibleParticleSystem, transform.position, transform.rotation);//if super is active, spawn this particle system when colliding with the collectibles
                 ParticleSystem superParts = superCollectiblePS.GetComponent<ParticleSystem>();//creates a particle system from this component
                 float superTotalDuration = superParts.duration + superParts.startLifetime;
-                Destroy(superCollectiblePS, superTotalDuration);//destroyes this particle system after the duration is up
+                Destroy(superCollectiblePS, superTotalDuration);//destroyes this particle system after the duration is up*/
             }
            if(upgradeJackpot==true)
             {
@@ -206,8 +214,8 @@ public class PlayerMovement : MonoBehaviour
 
             juggernautCharges -= 1; // subtracts a juggernaut charge each collision
 
-            score += collectibleScore * 2f; //player gets collectibleScore points times 2 for destroying an obstacle
-            SetScoreText();//updates the score
+            //score += collectibleScore * 2f; //player gets collectibleScore points times 2 for destroying an obstacle
+            //SetScoreText();//updates the score
 
             superCharge += chargeAmount * 5f;//destroying an obstacles give 5% charge, or 15% when jackpot is also active
             SetSuperCharge();//runs the Set SuperCharge function
@@ -234,8 +242,13 @@ public class PlayerMovement : MonoBehaviour
     void SetScoreText()
     {
         //updates the score text with the new score
-        tmpScoreText.text = "Stars collected: " + score.ToString();//updates the UI score text
+        tmpScoreText.text = score.ToString();//updates the UI score text
         tmpGameOverScore.text = "Stars collected: " + score.ToString();//updates the Game Over final score text
+
+
+        totalStars += 1f;//everytime this function runs, add one to totalStars
+        PlayerPrefs.SetFloat("totalStars", totalStars);//sets the totalStars PlayerPref to the current totalStars count
+        tmpTotalStars.text = "Total stars: " + totalStars.ToString();//updates the game over total star text
 
         if (score > highScore){ 
             PlayerPrefs.SetFloat("highScore", score); //updates the High Score player pref if the current score if higher
@@ -270,12 +283,15 @@ public class PlayerMovement : MonoBehaviour
         float totalDuration = parts.duration + parts.startLifetime;//sets the total duration of the particle lifespan onto the variable
         Destroy(superParticles, 3.0f);//destroy the super particles after the total duration is up*/
 
-        superParticleSystem.GetComponent<ParticleSystem>().enableEmission = true;//enables emission on the particles once super is active
+        //superParticleSystem.GetComponent<ParticleSystem>().enableEmission = true;//enables emission on the particles once super is active
+        superLight.SetActive(true);//turns on this light
+
     }
 
     public void SuperParticlesOff()
     {
-        superParticleSystem.GetComponent<ParticleSystem>().enableEmission = false;//disables emission on the particles once super is active
+        //superParticleSystem.GetComponent<ParticleSystem>().enableEmission = false;//disables emission on the particles once super is active
+        superLight.SetActive(false);//turns light off
     }
 
     public void JuggernautOn()
@@ -391,13 +407,13 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        pos = gameObject.transform.position;//sets pos vector3 with the player's position
+        //pos = gameObject.transform.position;//sets pos vector3 with the player's position
 
     }
 
 
 
-    IEnumerator offset()//a coroutine to update the position of the ground glow after X seconds
+    /*IEnumerator offset()//a coroutine to update the position of the ground glow after X seconds
     {
         while(true)
         {
@@ -412,7 +428,7 @@ public class PlayerMovement : MonoBehaviour
         }
        
 
-    }
+    }*/
 
 
     private void SlowOff()

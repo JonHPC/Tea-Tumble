@@ -10,6 +10,8 @@ public class JackpotManager : MonoBehaviour {
 
     public GameObject jackpotParticleSystem;
 
+
+
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player")) //checks to see if player is colliding with upgrade

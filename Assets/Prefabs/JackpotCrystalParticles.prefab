@@ -9,18 +9,18 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1717473928185584}
+  m_RootGameObject: {fileID: 1694669565146742}
   m_IsPrefabAsset: 1
---- !u!1 &1717473928185584
+--- !u!1 &1694669565146742
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4535424566781232}
-  - component: {fileID: 198141578134562470}
-  - component: {fileID: 199686414677888714}
+  - component: {fileID: 4524148024238090}
+  - component: {fileID: 198652024446423136}
+  - component: {fileID: 199231328350638332}
   m_Layer: 0
   m_Name: JackpotCrystalParticles
   m_TagString: Untagged
@@ -28,12 +28,12 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4535424566781232
+--- !u!4 &4524148024238090
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1717473928185584}
+  m_GameObject: {fileID: 1694669565146742}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -41,12 +41,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!198 &198141578134562470
+--- !u!198 &198652024446423136
 ParticleSystem:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1717473928185584}
+  m_GameObject: {fileID: 1694669565146742}
   serializedVersion: 5
   lengthInSec: 2
   simulationSpeed: 1
@@ -194,7 +194,7 @@ ParticleSystem:
       maxColor: {r: 0.6627451, g: 0.92941177, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.9346093, g: 0.78524387, b: 0.9622642, a: 1}
+        key0: {r: 1, g: 0.9141263, b: 0.25, a: 1}
         key1: {r: 1, g: 0.9529412, b: 0.5058824, a: 1}
         key2: {r: 0.89411765, g: 0.9647059, b: 1, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
@@ -4475,13 +4475,13 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!199 &199686414677888714
+--- !u!199 &199231328350638332
 ParticleSystemRenderer:
   serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1717473928185584}
+  m_GameObject: {fileID: 1694669565146742}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1

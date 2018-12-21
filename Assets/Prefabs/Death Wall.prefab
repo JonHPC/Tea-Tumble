@@ -123,7 +123,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2610efa0844244269bd18ed4f365d5a8, type: 3}
+  m_audioClip: {fileID: 8300000, guid: c66fa93ab02b94c8bafe33efb8b93ef6, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -221,9 +221,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverMenu: {fileID: 0}
+  retryButton: {fileID: 0}
+  menuButton: {fileID: 0}
+  quitButton: {fileID: 0}
   player: {fileID: 0}
   playerDead: 0
   superStatus: 0
   fullCharge: 0
   playerDeathParticles: {fileID: 1304567657446090, guid: 3e1ffbddef5b44bac98e315e0aa03fb0,
     type: 2}
+  enoughStars: 0
+  totalStars: 0
