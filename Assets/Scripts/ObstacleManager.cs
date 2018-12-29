@@ -45,6 +45,11 @@ public class ObstacleManager : MonoBehaviour {
         transform.Translate(Vector3.up * obstacleMoverSpeed * Time.deltaTime, Space.World);//moves the obstacles upwards every frame
     }
 
+    void Update()
+    {
+        transform.Rotate(new Vector3(0, 45, 0) * Time.deltaTime); // rotates the collectible to make it look cool
+    }
+
     private void OnTriggerEnter(Collider other) // destroys any collectibles that spawn in the same spot as an obstacle
     {
         if(other.gameObject.CompareTag("Collectibles"))

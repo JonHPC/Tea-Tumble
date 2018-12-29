@@ -81,6 +81,23 @@ MonoBehaviour:
   - {fileID: 1742094064172660, guid: ceb6f92c05ad34a4281176ddd4817465, type: 2}
   - {fileID: 1528107959068292, guid: 8ffa6d0840b27431bb56589291d9521b, type: 2}
   - {fileID: 1807548777341214, guid: e53cbe01d0f84408392f21f23810b672, type: 2}
+  - {fileID: 1513710109880980, guid: 9ad0b394880ae4a6c8b80ec6d39be34a, type: 2}
+  - {fileID: 1790080908253036, guid: 5857197b287c642bda751375c5971fef, type: 2}
+  - {fileID: 1852310082686258, guid: 6eb919a3486c94819aeaed619b4a6812, type: 2}
+  - {fileID: 1445911321154560, guid: 06dda9cb641ff4d078e0ac15951a3b31, type: 2}
+  - {fileID: 1524045080023698, guid: 0904ca66a6675424f9285cf89f31e415, type: 2}
+  - {fileID: 1741395554478498, guid: 1c07049826bb7445c875aa5e0715da00, type: 2}
+  - {fileID: 1885010999457930, guid: 339aee93890c44d5c8c2720e093e317e, type: 2}
+  - {fileID: 1593394294475438, guid: 34fc29fe395d54b1092ca7727226a709, type: 2}
+  - {fileID: 1761332488471194, guid: 32bfff29e6e5c4fa3a12486a447eea0d, type: 2}
+  - {fileID: 1882293278311760, guid: 240ba76eb0c9a49c9a1c8c5d1a51e534, type: 2}
+  - {fileID: 1879447655603750, guid: 4f94001d4f93e47b29fde137ec87f39f, type: 2}
+  - {fileID: 1848024510538962, guid: c6a206ef93fac4afa852a55fe64ca48e, type: 2}
+  - {fileID: 1870256173019276, guid: 5f1873a76107b4fa49d8d3129b56d4df, type: 2}
+  - {fileID: 1628718081115114, guid: 344735bd22b53420bb29216691baa653, type: 2}
+  - {fileID: 1238419663936470, guid: ba8f4dcecc0184800afc57a2f1b06ca5, type: 2}
+  - {fileID: 1588135068187230, guid: 4599832b9717b413ab00984b70651bbb, type: 2}
+  - {fileID: 1345749878920368, guid: fb23ff94baa0d43a792bad50dab1ac18, type: 2}
   collectibleSpawn:
   - {fileID: 0}
   - {fileID: 0}

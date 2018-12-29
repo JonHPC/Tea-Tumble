@@ -16,7 +16,8 @@ public class MainMenuHighScore : MonoBehaviour {
         highScore = PlayerPrefs.GetFloat("highScore", 0f); //gets the high score player pref and stores it in this variable
 
         highScoreText.text = "HIGH SCORE: " + highScore.ToString();//sets the high score TMP to the current high score stored in the highScore variable
-	}
+
+    }
 
     public void ResetHighScore()
     {

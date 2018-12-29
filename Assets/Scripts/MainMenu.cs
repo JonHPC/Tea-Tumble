@@ -22,10 +22,11 @@ public class MainMenu : MonoBehaviour {
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
         AudioSource startAudio = GetComponent<AudioSource>();
         startAudio.Play();
-        bunnyRun.SetTrigger("Start");//makes the bunny switch to the roll animation
-        bunnyRun.SetBool("isGrounded", false);//same as above
+        //bunnyRun.SetTrigger("Start");//makes the bunny switch to the roll animation
+        //bunnyRun.SetBool("isGrounded", false);//same as above
         bunnyPhysics.isKinematic = false;//turns on physics on the rigidbody2d
-        bunnyPhysics.AddForce(0f, 1000f,0f);//simulates a jump by adding force
+
+        bunnyPhysics.AddForce(250f, 750f,0f);//simulates a jump by adding force
         StartGame(1f);//starts the game after 1 second
     }
 
@@ -56,6 +57,8 @@ public class MainMenu : MonoBehaviour {
         instructionsOn = true;// allows tapping the screen to make the bunny jump
         TitleBunny titleBunny = bunnyRunScript.GetComponent<TitleBunny>();
         titleBunny.instructionsOn = true;
+        Animator bunnyAnimator = bunnyRunScript.GetComponent<Animator>();//gets the animator component
+        bunnyAnimator.SetBool("instructionsOn", true);
     }
 
    
@@ -68,6 +71,7 @@ public class MainMenu : MonoBehaviour {
         Animator bunnyAnimator = bunnyRunScript.GetComponent<Animator>();//gets the animator component
         titleBunny.isGrounded = true;//set this boolean to true
         bunnyAnimator.SetBool("isGrounded", true);//sets the animation
+        bunnyAnimator.SetBool("instructionsOn", false);
         //bunnyAnimator.SetTrigger("Reset");
 
     }

@@ -145,7 +145,7 @@ public class GameManager : MonoBehaviour {
 
 
 
-            if (Random.Range(1, 10) == 1)//chance to spawn a jackpot block per platform spawn
+            if (Random.Range(1, 15) == 1)//chance to spawn a jackpot block per platform spawn
             {
                 int jackpotSpawnIndex = Random.Range(0, upgradeSpawn.Length); //finds a random spawn point within the array of upgrade spawn points 
                 GameObject jackpot = Instantiate(jackpotBlock, upgradeSpawn[jackpotSpawnIndex].position, upgradeSpawn[jackpotSpawnIndex].rotation); //creates an upgrade at that random spawn point
@@ -168,7 +168,7 @@ public class GameManager : MonoBehaviour {
 
                 }
 
-                if (Random.Range(1, 10) == 1)//10% chance to spawn a juggernaut block per platform spawn 
+                if (Random.Range(1, 20) == 1)// chance to spawn a juggernaut block per platform spawn 
                 {
                     int upgradeSpawnIndex = Random.Range(0, upgradeSpawn.Length); //finds a random spawn point within the array of upgrade spawn points
                     GameObject upgrade = Instantiate(upgradeBlock, upgradeSpawn[upgradeSpawnIndex].position, upgradeSpawn[upgradeSpawnIndex].rotation); //creates an upgrade at that random spawn point
@@ -182,7 +182,7 @@ public class GameManager : MonoBehaviour {
 
             if (levelCount >2)//stars spawning slow upgrades at level 3
             {
-                if (Random.Range(1, 10) == 1)//10% chance to spawn a slow upgrade block per platform spawn
+                if (Random.Range(1, 25) == 1)//5% chance to spawn a slow upgrade block per platform spawn
                 {
                     int slowSpawnIndex = Random.Range(0, upgradeSpawn.Length); //finds a random spawn point within the array of upgrade spawn points
                     GameObject slow = Instantiate(slowBlock, upgradeSpawn[slowSpawnIndex].position, upgradeSpawn[slowSpawnIndex].rotation);//creates an upgrade at that random spawn point
@@ -216,10 +216,10 @@ public class GameManager : MonoBehaviour {
 
             else if (levelCount >= 3)//after the above, do this code
             {
-                spawnRate -= 0.25f; // increates the spawn rate
-                spawnRate = Mathf.Clamp(spawnRate, 0.5f, 3f); //restricts the spawn rate between 0.6 seconds and 3 seconds
+                spawnRate -= 0.15f; // increates the spawn rate
+                spawnRate = Mathf.Clamp(spawnRate, 0.45f, 3f); //restricts the spawn rate between 0.6 seconds and 3 seconds
                 platformSpeed += 0.5f;
-                platformSpeed = Mathf.Clamp(platformSpeed, 1.5f, 8f); // restricts platform speeds
+                platformSpeed = Mathf.Clamp(platformSpeed, 1.5f, 7.5f); // restricts platform speeds
                 elapsedTime -= 3f;
             }
 
@@ -235,8 +235,8 @@ public class GameManager : MonoBehaviour {
             tmpLevelPopup.gameObject.SetActive(false);//turns off the level popup
         }
 
-        tmpLevelText.text = "Level: " + levelCount.ToString(); //constantly updates the level text with the current levelCount.
-        tmpLevelPopup.text = "Level: " + levelCount.ToString();// updates the level popup with the current level
+        tmpLevelText.text = "LEVEL: " + levelCount.ToString(); //constantly updates the level text with the current levelCount.
+        tmpLevelPopup.text = "LEVEL: " + levelCount.ToString();// updates the level popup with the current level
 
        /*if(player.GetComponent<PlayerMovement>().isGrounded == true && elapsedTime > 0.1f)//creates spot lights if the player is grounded
         {

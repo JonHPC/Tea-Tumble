@@ -12,9 +12,11 @@ public class PlayerMovement : MonoBehaviour
 
     public float tiltSpeed = 200f; //the speed the player moves
     public float jumpPower = 750f; //jump power
+    public float jumpPowerX = 50f;
     public float collectibleScore = 1f;//initial points a collectible is worth
 
     public bool isGrounded = false; //checks to make sure the player is grounded to prevent jumping mid air
+    public bool isMoving = false; //checks to see if player is moving
     public bool upgradeJuggernaut = false;// checks to see if the Juggernaut upgrade is active
     public bool upgradeSlow = false; //checks to see if the Slow upgrade is active
     public bool upgradeJackpot = false;//checks to see if Jackpot is active
@@ -100,6 +102,7 @@ public class PlayerMovement : MonoBehaviour
         superStatus = false;//initializes the super status to off
         chargeAmount = 1f;//initializes charge amount
         isGrounded = false;
+        isMoving = false;//initially not moving
         gamePaused = false;//initializes
         collectibleScore = 1f;//initial score of collectibles
       
@@ -243,12 +246,12 @@ public class PlayerMovement : MonoBehaviour
     {
         //updates the score text with the new score
         tmpScoreText.text = score.ToString();//updates the UI score text
-        tmpGameOverScore.text = "Stars collected: " + score.ToString();//updates the Game Over final score text
+        tmpGameOverScore.text = "STARS COLLECTED: " + score.ToString();//updates the Game Over final score text
 
 
         totalStars += 1f;//everytime this function runs, add one to totalStars
         PlayerPrefs.SetFloat("totalStars", totalStars);//sets the totalStars PlayerPref to the current totalStars count
-        tmpTotalStars.text = "Total stars: " + totalStars.ToString();//updates the game over total star text
+        tmpTotalStars.text = "TOTAL STARS: " + totalStars.ToString();//updates the game over total star text
 
         if (score > highScore){ 
             PlayerPrefs.SetFloat("highScore", score); //updates the High Score player pref if the current score if higher
@@ -342,33 +345,89 @@ public class PlayerMovement : MonoBehaviour
         {
 
 
-            playerRb.AddForce(Input.acceleration.x * tiltSpeed, 0f, 0f);//the input (-1 to 1) will be multiplied by 200f to control horizontal movement
+            //playerRb.AddForce(Input.acceleration.x * tiltSpeed, 0f, 0f);//the input (-1 to 1) will be multiplied by 200f to control horizontal movement
             playerRb.AddForce(0f, -50f, 0f);//this is the constant downward "gravity" force applied to the player
-            if (Input.acceleration.x < 0)//if device is tilted to the left, the sprite will be flipped on its x axis
-            {
+            Vector3 pos = transform.position;
 
+            if (Input.acceleration.x < -0.1f && isGrounded==true)//if device is tilted to the left, the sprite will be flipped on its x axis
+            {
                 flipIt.flipX = true;
+                pos.x -= tiltSpeed;
+                transform.position = pos;
+                isMoving = true;
+                animator.SetBool("isMoving", isMoving);
+
             }
-            else if (Input.acceleration.x >= 0)//otherwise the sprite will face to the right
+            else if(Input.acceleration.x < -0.1f && isGrounded == false)
+            {
+                flipIt.flipX = true;
+                pos.x -= tiltSpeed;
+                transform.position = pos;
+            }
+            else if (Input.acceleration.x > 0.1f && isGrounded == true)//otherwise the sprite will face to the right
             {
                 flipIt.flipX = false;
+                pos.x += tiltSpeed;
+                transform.position = pos;
+                isMoving = true;
+                animator.SetBool("isMoving", isMoving);
             }
-            animator.SetBool("isGrounded", isGrounded);//sets isGrounded bool in the animation to false, to roll the bunny
-
-            //playerRb.AddForce(Input.acceleration * tiltSpeed); //adds the Tilt* the tileSpeed variable to add force to the player rigidbody
-
-            /*if(Input.touchCount > 0 && isGrounded == true && Input.GetTouch(0).phase == TouchPhase.Began) //makes sure there is only one touch and the jump only occurrs if the object is grounded.
+            else if(Input.acceleration.x > 0.1f && isGrounded == false)
             {
-                playerRb.AddForce(new Vector3(0f, jumpPower, 0f), ForceMode.Force); //adds the jumpPower of force to the player rigidbody to make it jump
-                jumpSound.Play(); //plays jumpSound
-                //Debug.Log("IOS");//makes sure it shows IOS
+                flipIt.flipX = false;
+                pos.x += tiltSpeed;
+                transform.position = pos;
+            }
+            else if (Input.acceleration.x > -0.1f && Input.acceleration.x < 0.1f)
+            {
+                isMoving = false;
+                animator.SetBool("isMoving", isMoving);
+            }
+
+            /*Vector3 vel = playerRb.velocity;//gets the velocity from the player rigid body
+            float velx = vel.x;//isolates the x component of the velocity
+
+            if (velx > 0.3f || velx < -0.3f)//if there is more input than these, set running animation
+            {
+                isMoving = true;
+                animator.SetBool("isMoving", isMoving);
+            }
+            else if (velx > -0.3f && velx < 0.3f)//otherwise, if inputs are small, set idle animation
+            {
+                isMoving = false;
+                animator.SetBool("isMoving", isMoving);
             }*/
 
-            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) //causes the player to jump, add "&& isGrounded == true" if you want to make it only jump when grounded
+
+
+            /*Vector3 localVelocity = transform.InverseTransformDirection(playerRb.velocity);
+            localVelocity.x = 0;
+            playerRb.velocity = transform.TransformDirection(localVelocity);*/
+
+
+
+
+
+
+
+            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && isGrounded==true) //causes the player to jump, add "&& isGrounded == true" if you want to make it only jump when grounded
             {
                 playerRb.AddForce(new Vector3(0f, jumpPower, 0f), ForceMode.Force); //adds the jumpPower of force to the player rigidbody to make it jump
                 jumpSound.Play(); //plays jumpSound
+                //animator.SetBool("isGrounded", false);//sets isGrounded bool in the animation to false, to roll the bunny
 
+               /*if(Input.acceleration.x > 0.1f)
+                {
+                    playerRb.AddForce(new Vector3(jumpPowerX, jumpPower, 0f), ForceMode.Force); //adds the jumpPower of force to the player rigidbody to make it jump
+                }
+                else if (Input.acceleration.x < -0.1f)
+                {
+                    playerRb.AddForce(new Vector3(-jumpPowerX, jumpPower, 0f), ForceMode.Force); //adds the jumpPower of force to the player rigidbody to make it jump
+                }
+                else if(Input.acceleration.x > -0.1f && Input.acceleration.x < 0.1f)
+                {
+                    playerRb.AddForce(new Vector3(0f, jumpPower, 0f), ForceMode.Force); //adds the jumpPower of force to the player rigidbody to make it jump
+                }*/
             }
 
         }
