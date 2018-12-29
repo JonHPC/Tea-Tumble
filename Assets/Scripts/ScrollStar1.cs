@@ -14,8 +14,10 @@ public class ScrollStar1 : MonoBehaviour {
 
         Vector2 offset = mat.mainTextureOffset;//gets the vector2 element from the main texture
 
-        offset.y -= Time.deltaTime/60f; //moves along this axis over time
+        //offset.y -= Time.deltaTime/60f; //moves along this axis over time
 
-        mat.mainTextureOffset = offset;//updates the offset by the new offset
-	}
+        //mat.mainTextureOffset = offset;//updates the offset by the new offset
+
+        transform.Rotate(new Vector3(0, 0, 5) * Time.deltaTime / 5); // rotates  to make it look cool
+    }
 }

@@ -27,7 +27,7 @@ public class MainMenu : MonoBehaviour {
         bunnyPhysics.isKinematic = false;//turns on physics on the rigidbody2d
 
         bunnyPhysics.AddForce(250f, 750f,0f);//simulates a jump by adding force
-        StartGame(1f);//starts the game after 1 second
+        StartGame(1.2f);//starts the game after 1 second
     }
 
     IEnumerator delayedStart(float delay)//used to load the game after delay seconds using a coroutine

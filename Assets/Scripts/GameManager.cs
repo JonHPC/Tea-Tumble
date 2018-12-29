@@ -235,8 +235,8 @@ public class GameManager : MonoBehaviour {
             tmpLevelPopup.gameObject.SetActive(false);//turns off the level popup
         }
 
-        tmpLevelText.text = "LEVEL: " + levelCount.ToString(); //constantly updates the level text with the current levelCount.
-        tmpLevelPopup.text = "LEVEL: " + levelCount.ToString();// updates the level popup with the current level
+        tmpLevelText.text = "LEVEL " + levelCount.ToString(); //constantly updates the level text with the current levelCount.
+        tmpLevelPopup.text = "LEVEL " + levelCount.ToString();// updates the level popup with the current level
 
        /*if(player.GetComponent<PlayerMovement>().isGrounded == true && elapsedTime > 0.1f)//creates spot lights if the player is grounded
         {

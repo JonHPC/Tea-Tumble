@@ -107,7 +107,7 @@ public class DeathScript : MonoBehaviour {
     {
         yield return new WaitForSeconds(delay);//waits for delay seconds
         Advertisement.Show("video");//shows the ad after delay seconds
-        //Time.timeScale = 0f;//stops time after ad appears
+        Time.timeScale = 0f;//stops time after ad appears
         retryButton.SetActive(true);//reappears after 3 seconds
         menuButton.SetActive(true);//reappears after 3 seconds
         quitButton.SetActive(true);//reappears after 3 seconds
@@ -120,7 +120,7 @@ public class DeathScript : MonoBehaviour {
     IEnumerator delayedShowNoAd(float delay)
     {
         yield return new WaitForSeconds(delay);//waits for delay seconds
-        //Time.timeScale = 0f;//stops time after delay seconds
+        Time.timeScale = 0f;//stops time after delay seconds
         retryButton.SetActive(true);//reappears after 3 seconds
         menuButton.SetActive(true);//reappears after 3 seconds
         quitButton.SetActive(true);//reappears after 3 seconds

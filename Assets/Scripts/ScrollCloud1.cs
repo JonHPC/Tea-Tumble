@@ -19,6 +19,6 @@ public class ScrollCloud1: MonoBehaviour {
 
         //mat.mainTextureOffset = offset;//updates the offset by the new offset
 
-        transform.Rotate(new Vector3(0, 0,-15) * Time.deltaTime/10); // rotates  to make it look cool
+        transform.Rotate(new Vector3(0, 0,-15) * Time.deltaTime/5); // rotates  to make it look cool
     }
 }

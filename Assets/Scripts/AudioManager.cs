@@ -18,9 +18,21 @@ public class AudioManager : MonoBehaviour {
 	void Start () 
     {
         music.volume = PlayerPrefs.GetFloat("MusicVolume"); //gets the player pref volume that was set in the main menu
+
+
         muted = PlayerPrefs.GetInt("muted", 0);//takes the player pref for muted and sets it to false by default
 
-       if(muted == 0)//if game is not muted, do this
+        if (muted == 1)//if this is muted at beginning of the game, unmute it
+        {
+            AudioListener.pause = !AudioListener.pause;//mutes the audio like a toggle with the Mute Button
+        }
+
+    }
+
+    void Update()
+    {
+        muted = PlayerPrefs.GetInt("muted", 0);//keeps updating this int
+        if (muted == 0)//if game is not muted, do this
         {
             muteButton.gameObject.SetActive(true);//keeps the mute button active
             unmuteButton.gameObject.SetActive(false);//hides the unmute button
@@ -29,12 +41,8 @@ public class AudioManager : MonoBehaviour {
         {
             muteButton.gameObject.SetActive(false);//hidse the mute button
             unmuteButton.gameObject.SetActive(true);//shows the unmute button
-        }
-	}
 
-    void Update()
-    {
-        muted = PlayerPrefs.GetInt("muted", 0);//keeps updating this int
+        }
     }
 	
     public void PauseLowerVolume()
