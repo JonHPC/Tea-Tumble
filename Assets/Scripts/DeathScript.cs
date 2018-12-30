@@ -10,7 +10,7 @@ public class DeathScript : MonoBehaviour {
     public GameObject gameOverMenu;//references the game over menu game object
     public GameObject retryButton;//references coroutine, reappears after 3 seconds
     public GameObject menuButton;//reference coroutine, reappears after 3 seconds
-    public GameObject quitButton;//references coroutine,reappears after 3 seconds
+   //public GameObject quitButton;//references coroutine,reappears after 3 seconds
     public GameObject player; //references the player game object
     public bool playerDead;
     public bool superStatus = false;//checks to see whether the super is activated or not
@@ -50,7 +50,7 @@ public class DeathScript : MonoBehaviour {
             gameOverMenu.SetActive(true);//sets the game over menu to be active
             retryButton.SetActive(false);//initially sets to inactive
             menuButton.SetActive(false);//initially sets to inactive
-            quitButton.SetActive(false);//initially sets to inactive
+            //quitButton.SetActive(false);//initially sets to inactive
             playerDead = true;//sets this boolean to true
             //Time.timeScale = 0f;//stops time upon death
             totalStars = PlayerPrefs.GetFloat("totalStars", 0f);//sets the totalStars to the current amount of totalStars
@@ -110,7 +110,7 @@ public class DeathScript : MonoBehaviour {
         Time.timeScale = 0f;//stops time after ad appears
         retryButton.SetActive(true);//reappears after 3 seconds
         menuButton.SetActive(true);//reappears after 3 seconds
-        quitButton.SetActive(true);//reappears after 3 seconds
+        //quitButton.SetActive(true);//reappears after 3 seconds
     }
     void ShowAd(float delay)
     {
@@ -123,7 +123,7 @@ public class DeathScript : MonoBehaviour {
         Time.timeScale = 0f;//stops time after delay seconds
         retryButton.SetActive(true);//reappears after 3 seconds
         menuButton.SetActive(true);//reappears after 3 seconds
-        quitButton.SetActive(true);//reappears after 3 seconds
+        //quitButton.SetActive(true);//reappears after 3 seconds
     }
 
     void ShowNoAd(float delay)

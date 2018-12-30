@@ -2913,7 +2913,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 2ca2132d572f64838835fa7498120112, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 15581b44a8a174e71b660a98acc9a5e0, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -5274,9 +5274,9 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: "\tStar\n\t\n\tCharges super bar faster\n\t\n\tGives you the ability to
-    smash\n\t\n\tSlows time temporarily\n\n\n\tGet a total of 50,000 stars and ads
-    \n\twill be PERMANENTLY disabled."
+  m_text: "\tCOLLECT these stars.\n\t\n\tCharges super bar faster.\n\t\n\tGives you
+    the ability to SMASH\n\t\n\tSLOWS time temporarily.\n\n\n\tGet a total of 50,000
+    stars and ads \n\twill be PERMANENTLY disabled."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d2d448dcb05ac49218675978e19463cf, type: 2}
   m_sharedMaterial: {fileID: 21191344925998010, guid: d2d448dcb05ac49218675978e19463cf,
@@ -5323,7 +5323,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 134
+  m_firstOverflowCharacterIndex: 152
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -5346,10 +5346,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 718016397}
-    characterCount: 164
+    characterCount: 182
     spriteCount: 0
-    spaceCount: 40
-    wordCount: 28
+    spaceCount: 42
+    wordCount: 30
     linkCount: 0
     lineCount: 11
     pageCount: 1
@@ -8718,10 +8718,10 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 'TILT your device to control the character
+  m_text: 'TILT your device to control the character.
 
 
-    TAP your screen to jump
+    TAP your screen to jump.
 
 
     DON''T get pushed to the top, you will blow up!
@@ -8779,7 +8779,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 223
+  m_firstOverflowCharacterIndex: 225
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -8802,7 +8802,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1315066031}
-    characterCount: 337
+    characterCount: 339
     spriteCount: 0
     spaceCount: 66
     wordCount: 63
@@ -10412,7 +10412,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: VERSION 0.92
+  m_text: VERSION 1.0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d2d448dcb05ac49218675978e19463cf, type: 2}
   m_sharedMaterial: {fileID: 21191344925998010, guid: d2d448dcb05ac49218675978e19463cf,
@@ -10481,7 +10481,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1517950208}
-    characterCount: 12
+    characterCount: 11
     spriteCount: 0
     spaceCount: 1
     wordCount: 3

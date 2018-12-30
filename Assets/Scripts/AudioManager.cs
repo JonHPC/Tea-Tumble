@@ -25,6 +25,7 @@ public class AudioManager : MonoBehaviour {
         if (muted == 1)//if this is muted at beginning of the game, unmute it
         {
             AudioListener.pause = !AudioListener.pause;//mutes the audio like a toggle with the Mute Button
+            PlayerPrefs.SetInt("muted", 0);//turns audio back on at start
         }
 
     }
