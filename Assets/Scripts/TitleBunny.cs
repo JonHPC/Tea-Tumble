@@ -34,6 +34,9 @@ public class TitleBunny : MonoBehaviour {
 
     private void Update()
     {
+        float sfxVolume = PlayerPrefs.GetFloat("sfxVolume", 0.5f);//sets the jump sound volume to the player pref
+        jumpSound.volume = sfxVolume;//sets the jump sound to the player pref
+
         Rigidbody bunnyRb = GetComponent<Rigidbody>();//initializes the Rigidbody component
         bunnyRb.AddForce(new Vector3(0f, -50f, 0f));//constant downward force
 
@@ -114,6 +117,13 @@ public class TitleBunny : MonoBehaviour {
             }
 
             //pos = gameObject.transform.position;//sets pos vector3 with the player's position
+        }
+
+        if(instructionsOn==false)
+        {
+            Animator animator = GetComponent<Animator>();//initializes the Animator component
+            animator.SetBool("isMoving", false);//forces bunny to stop running on title screen
+            
         }
 
        

@@ -14,13 +14,21 @@ public class MainMenu : MonoBehaviour {
     public bool instructionsOn;//used for the instructions tutorial
 
     public GameObject bunnyRunScript;//accesses the bunny run object
+
+    private float musicVolume;
+    private float sfxVolume;
     
-   
+  
 
     public void PlayGame()
     {
+        musicVolume = PlayerPrefs.GetFloat("MusicVolume",0.5f); //stores the slider value to a player pref tagged "MusicVolume"
+        sfxVolume = PlayerPrefs.GetFloat("sfxVolume",0.5f); //sets the default voluem to these to 50%
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
+        PlayerPrefs.SetFloat("MusicVolume", musicVolume); //sets the tag "MusicVolume" to the music.volume variable
+        PlayerPrefs.SetFloat("sfxVolume", sfxVolume);
         AudioSource startAudio = GetComponent<AudioSource>();
+        startAudio.volume = sfxVolume;
         startAudio.Play();
         //bunnyRun.SetTrigger("Start");//makes the bunny switch to the roll animation
         //bunnyRun.SetBool("isGrounded", false);//same as above

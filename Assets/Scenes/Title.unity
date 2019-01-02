@@ -4699,7 +4699,7 @@ MonoBehaviour:
     SFX/VFX/3D MODELS
 
 
-    Jon "Heiwa" Chen
+    Jon Chen
 
 
     UI DESIGN/BACKGROUND/SPRITES
@@ -4777,19 +4777,19 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 668257050}
-    characterCount: 96
+    characterCount: 88
     spriteCount: 0
-    spaceCount: 13
-    wordCount: 15
+    spaceCount: 12
+    wordCount: 14
     linkCount: 0
     lineCount: 8
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -5962,11 +5962,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -6370,6 +6370,7 @@ GameObject:
   m_Component:
   - component: {fileID: 954807605}
   - component: {fileID: 954807604}
+  - component: {fileID: 954807606}
   m_Layer: 0
   m_Name: MenuSound
   m_TagString: Untagged
@@ -6485,6 +6486,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &954807606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 954807603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc43eae9099374647be2eb3f9c09a13a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &956993135
 GameObject:
   m_ObjectHideFlags: 0
@@ -8191,7 +8203,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4685262020826642, guid: 95e6f110d3f784ac18b9b1b0bb54845c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -2.6
+      value: -1.1
       objectReference: {fileID: 0}
     - target: {fileID: 4685262020826642, guid: 95e6f110d3f784ac18b9b1b0bb54845c, type: 2}
       propertyPath: m_LocalPosition.y
@@ -10390,8 +10402,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -333, y: 26.699951}
-  m_SizeDelta: {x: 195.9, y: 52.8}
+  m_AnchoredPosition: {x: -327.2, y: 26.699951}
+  m_SizeDelta: {x: 231, y: 52.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1517950208
 MonoBehaviour:
@@ -10412,7 +10424,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: VERSION 1.0
+  m_text: VERSION 1.0.1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d2d448dcb05ac49218675978e19463cf, type: 2}
   m_sharedMaterial: {fileID: 21191344925998010, guid: d2d448dcb05ac49218675978e19463cf,
@@ -10481,10 +10493,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1517950208}
-    characterCount: 11
+    characterCount: 13
     spriteCount: 0
     spaceCount: 1
-    wordCount: 3
+    wordCount: 4
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -11371,11 +11383,11 @@ MonoBehaviour:
     lineCount: 6
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -11639,11 +11651,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -13153,7 +13165,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4685262020826642, guid: 95e6f110d3f784ac18b9b1b0bb54845c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 9.6
+      value: 7.5
       objectReference: {fileID: 0}
     - target: {fileID: 4685262020826642, guid: 95e6f110d3f784ac18b9b1b0bb54845c, type: 2}
       propertyPath: m_LocalPosition.y

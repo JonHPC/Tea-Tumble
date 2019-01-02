@@ -168,7 +168,7 @@ public class GameManager : MonoBehaviour {
 
                 }
 
-                if (Random.Range(1, 20) == 1)// chance to spawn a juggernaut block per platform spawn 
+                if (Random.Range(1, 18) == 1)// chance to spawn a juggernaut block per platform spawn 
                 {
                     int upgradeSpawnIndex = Random.Range(0, upgradeSpawn.Length); //finds a random spawn point within the array of upgrade spawn points
                     GameObject upgrade = Instantiate(upgradeBlock, upgradeSpawn[upgradeSpawnIndex].position, upgradeSpawn[upgradeSpawnIndex].rotation); //creates an upgrade at that random spawn point
