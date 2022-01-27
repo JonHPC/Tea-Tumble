@@ -1,2 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+#remove from github language stats
+jquery.js linguist-vendored=false
